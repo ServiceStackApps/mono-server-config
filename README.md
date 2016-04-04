@@ -1,20 +1,20 @@
 This is a guide how to deploy and run Service Stack application on Ubuntu Linux.
 
-#Step 1: Build And Deploy Application
+#Step 1: Build and Deploy Application
 
 Create Project from ServiceStack Blank template. If you don't have ServiceStack templates
 in Visual Studio, you should install [ServiceStack Visual Studio extension](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project)
 first.
 
-      [[https://github.com/ServiceStack/ServiceStackApps/mono-server-config/blob/master/images/create.png|alt=create project]]
+[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/create.png|alt=create project]]
 
 Publish it into directory
 
-      [[https://github.com/ServiceStack/ServiceStackApps/mono-server-config/blob/master/images/2-publish-1.png|alt=create project]]
+[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/2-publish-1.png|alt=create project]]
 
-      [[https://github.com/ServiceStack/ServiceStackApps/mono-server-config/blob/master/images/2-publish-2.png|alt=create project]]
+[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/2-publish-2.png|alt=create project]]
 
-      [[https://github.com/ServiceStack/ServiceStackApps/mono-server-config/blob/master/images/2-publish-3.png|alt=create project]]
+[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/2-publish-3.png|alt=create project]]
 
 Upload content of the published directory to your linux server into `~/hello-app` directory. You
 can use WinSCP or other scp client to do this.
@@ -43,7 +43,8 @@ server. Connect to your server via ssh and run these commands in terminal
 
 #Step 3: Configure nginx and HyperFastCGI
       
-      #download and copy configs
+Download and copy configs
+
       curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/nginx-config/hello-app.conf --output hello-app.conf
       curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/hfc-config/hfc.conf --output hfc.config
       sudo cp hello-app.conf /etc/nginx/sites-available/
@@ -73,15 +74,15 @@ Open nginx config for editing:
 
 Then find and change line `server_name hello-app;` to `server_name www.yourdomain.com`
       
-      [[https://github.com/ServiceStack/ServiceStackApps/mono-server-config/blob/master/images/nginx-conf.png|alt=nginx configuraion]]
+[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/nginx-conf.png|alt=nginx configuraion]]
 
 Change server name in hyperfastCGI config too.
 
       sudo mcedit /etc/hyperfastcgi
 
-find and change line <vhost>hello-app</vhost> to host name 
+find and change line `<vhost>hello-app</vhost>` to host name 
 
-      [[https://github.com/ServiceStack/ServiceStackApps/mono-server-config/blob/master/images/hfc-config.png|alt=hyperfastcgi configuraion]]
+[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/hfc-config.png|alt=hyperfastcgi configuraion]]
 
 
 #Step 4: Run the application
