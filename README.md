@@ -6,15 +6,15 @@ Create Project from ServiceStack Blank template. If you don't have ServiceStack 
 in Visual Studio, you should install [ServiceStack Visual Studio extension](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project)
 first.
 
-[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/create.png|alt=create project]]
+![Create Project](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/create.png)
 
 Publish it into directory
 
-[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/2-publish-1.png|alt=create project]]
+![Publish](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/2-publish-1.png)
 
-[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/2-publish-2.png|alt=create project]]
+![Publish](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/2-publish-2.png)
 
-[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/2-publish-3.png|alt=create project]]
+![Publish](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/2-publish-3.png)
 
 Upload content of the published directory to your linux server into `~/hello-app` directory. You
 can use WinSCP or other scp client to do this.
@@ -22,7 +22,7 @@ can use WinSCP or other scp client to do this.
 
 #Step 2: Install mono, nginx and HyperFastCGI
 
-To run ServiceStack application on Linux you need to install mono, nginx and hyperfastcgi
+To run ServiceStack application on Linux server you need to install mono, nginx and hyperfastcgi
 server. Connect to your server via ssh and run these commands in terminal
 
       #installing mono
@@ -46,11 +46,13 @@ server. Connect to your server via ssh and run these commands in terminal
 Download and copy configs
 
       curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/nginx-config/hello-app.conf --output hello-app.conf
-      curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/hfc-config/hfc.conf --output hfc.config
+      curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/hfc-config/hfc.config --output hfc.config
       sudo cp hello-app.conf /etc/nginx/sites-available/
+      sudo ln -s /etc/nginx/sites-available/hello-app.conf /etc/nginx/sites-enabled/
+      sudo rm /etc/nginx/sites-enabled/default     
       sudo mkdir -p /etc/hyperfastcgi
       sudo mkdir -p /var/log/hyperfastcgi
-      sudo chown -R www-data:www-data /var/log/hyperdfastcgi
+      sudo chown -R www-data:www-data /var/log/hyperfastcgi
       sudo cp hfc.config /etc/hyperfastcgi
 
 You need to edit `/etc/nginx/fastcgi_params` file
@@ -58,8 +60,7 @@ You need to edit `/etc/nginx/fastcgi_params` file
       sudo apt-get mc
       sudo mcedit /etc/nginx/fastcgi_params
 
-Find parameters `SCRIPT_FILENAME` and `PATH_INFO`. If you have such in config file, remove 
-them or mark it as comments using hash sign `#`
+Find parameters `SCRIPT_FILENAME` and `PATH_INFO`. If you have such parameters in config file, remove the lines or mark them as comments using hash sign `#`
 
     #fastcgi_param	SCRIPT_FILENAME		$request_filename;
 
@@ -72,17 +73,21 @@ Open nginx config for editing:
       sudo apt-get mc
       sudo mcedit /etc/nginx/sites-available/hello-app.conf
 
-Then find and change line `server_name hello-app;` to `server_name www.yourdomain.com`
+Then find and change line `server_name hello-app;` to `server_name www.yourdomain.com;`
       
-[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/nginx-conf.png|alt=nginx configuraion]]
+![nginx configuration](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/nginx-conf.png)
+
+Restart nginx after changes
+
+      sudo /etc/init.d/nginx restart
 
 Change server name in hyperfastCGI config too.
 
       sudo mcedit /etc/hyperfastcgi
 
-find and change line `<vhost>hello-app</vhost>` to host name 
+Find and change line `<vhost>hello-app</vhost>` to host name. 
 
-[[https://github.com/ServiceStackApps/mono-server-config/blob/master/images/hfc-config.png|alt=hyperfastcgi configuraion]]
+![hyperfastcgi configuration](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/hfc-config.png)
 
 
 #Step 4: Run the application
