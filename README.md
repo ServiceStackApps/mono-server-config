@@ -8,14 +8,14 @@ Then run following commands in console:
     cd ~
     curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/install.sh | bash
     
-    Fill the site name as your domain name or IP address of the server, other parameters your can leave by default (use ENTER for it)
+The script will ask you to set up site settings. You have to fill the site name as your domain name or IP address of the server, you can leave other parameters by default (use ENTER for it).
 
-    After installation is done run the following command:
+After installation is done run the following command:
 
     cd /var/log/hyperfastcgi
     sudo -H -u www-data nohup hyperfastcgi4 /config=/etc/hyperfastcgi/hfc.config &
 
-    To check the site is working properly open `http://www.yoursitedomain.com/metadata` in browser.
+To check the site is working properly open `http://www.yoursitedomain.com/metadata` in browser.
 
 #Step 1: Build and Deploy Application
 
@@ -133,4 +133,4 @@ Find and change line `<vhost>hello-app</vhost>` to host name.
 
 #Step 5: Check access to web services
 
-Open in browser http://www.yourdomain.com/ and check availability of services.
+Open in browser http://www.yoursitedomain.com/metadata and check availability of services.
