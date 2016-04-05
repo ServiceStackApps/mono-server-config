@@ -19,6 +19,26 @@ Publish it into directory
 Upload content of the published directory to your linux server into `~/hello-app` directory. You
 can use WinSCP or other scp client to do this.
 
+Click "New" to open new connection to your linux server.
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/3-login-0.png)
+
+Type your server ip, user and password or use private key and click "Login"
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/3-login-1.png)
+
+Select folder where ServiceStack solution was deployed on the left pane and your user home folder on the right pane.
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/3-login-2.png)
+
+Create folder 'hello-app' in (using F7 key on the right pane)
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/3-create-folder.png)
+
+Select all files in deployment folder and copy them to `~/hello-app` folder on the server.
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/3-copy-4.png)
+
 
 #Step 2: Install mono, nginx and HyperFastCGI
 
@@ -29,14 +49,12 @@ server. Connect to your server via ssh and run these commands in terminal
       sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
       echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
       sudo apt-get update
-      sudo apt-get install mono-complete
-
+      sudo apt-get install -y mono-complete
       #installing nginx
-      sudo apt-get install nginx
-      
+      sudo apt-get install -y nginx
       #installing HyperFastCGI
       cd ~
-      sudo apt-get install git autoconf automake libtool make libglib2.0-dev libevent-dev
+      sudo apt-get install -y git autoconf automake libtool make libglib2.0-dev libevent-dev
       git clone https://github.com/xplicit/hyperfastcgi
       cd hyperfastcgi
       ./autogen.sh --prefix=/usr && make && sudo make install
