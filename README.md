@@ -1,4 +1,21 @@
 This is a guide how to deploy and run Service Stack application on Ubuntu Linux.
+#Quick Start
+
+Deploy your application to `/var/www/hello-app` folder. If you don't know how to do this please go to Step 1
+
+Then run following commands in console:
+
+    cd ~
+    curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/install.sh | bash
+    
+    Fill the site name as your domain name or IP address of the server, other parameters your can leave by default (use ENTER for it)
+
+    After installation is done run the following command:
+
+    cd /var/log/hyperfastcgi
+    sudo -H -u www-data nohup hyperfastcgi4 /config=/etc/hyperfastcgi/hfc.config &
+
+    To check the site is working properly open `http://www.yoursitedomain.com/metadata` in browser.
 
 #Step 1: Build and Deploy Application
 
@@ -111,7 +128,7 @@ Find and change line `<vhost>hello-app</vhost>` to host name.
 #Step 4: Run the application
 
       cd /var/log/hyperfastcgi
-      sudo -H -u www-data nohup hyperfastcgi4 /config=hfc.config
+      sudo -H -u www-data nohup hyperfastcgi4 /config=/etc/hyperfastcgi/hfc.config &
 
 
 #Step 5: Check access to web services
