@@ -40,17 +40,25 @@ curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/hfc-c
 #installing mono
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
-sudo apt-get update
-sudo apt-get install -y mono-complete
+echo "Updating repositories..."
+sudo apt-get -qqq update
+echo "Installing mono..."
+sudo apt-get install -y -q mono-complete
 #installing nginx
+echo "Installing nginx..."
 sudo apt-get install -y nginx
 #installing HyperFastCGI
+echo "Installing HyperFastCGI"
 sudo apt-get install -y git autoconf automake libtool make libglib2.0-dev libevent-dev
 git clone https://github.com/xplicit/hyperfastcgi
 cd hyperfastcgi
+#double call for autogen.sh Workaround for weird error 'cannot find Makefile.in' while writing config.status
+./autogen.sh --prefix=/usr
 ./autogen.sh --prefix=/usr && make && sudo make install
-
 cd ..
+
+#Configuring
+echo "Configure site"
 sudo cp config/$USERSITE.conf /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/$USERSITE.conf /etc/nginx/sites-enabled/
 echo "Disable default nginx site"

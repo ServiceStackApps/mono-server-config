@@ -6,8 +6,9 @@ Deploy your application to `/var/www/hello-app` folder. If you don't know how to
 Then run following commands in console:
 
     cd ~
-    curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/install.sh | bash
-    
+    curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/install.sh --output install.sh
+    source install.sh
+
 The script will ask you to set up site settings. You have to fill the site name as your domain name or IP address of the server, you can leave other parameters by default (use ENTER for it).
 
 After installation is done run the following command:
@@ -56,6 +57,10 @@ Select all files in deployment folder and copy them to `~/hello-app` folder on t
 
 ![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/3-copy-4.png)
 
+Login to your linux server via SSH and copy files to `/var/www` directory
+
+    sudo mkdir -p /var/www
+    sudo cp -R ~/hello-app /var/www
 
 #Step 2: Install mono, nginx and HyperFastCGI
 
