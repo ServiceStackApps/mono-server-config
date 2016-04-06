@@ -74,7 +74,7 @@ sudo mkdir -p /etc/hyperfastcgi
 sudo mkdir -p /var/log/hyperfastcgi
 sudo chown -R www-data:www-data /var/log/hyperfastcgi
 sudo cp config/hfc.config /etc/hyperfastcgi
-(cd hyperfastcgi/samples/ubuntu-stratup/ && source install-service.sh)
+(cd hyperfastcgi/samples/ubuntu-startup/ && source install-service.sh)
 
 sudo /etc/init.d/nginx restart
 sudo /etc/init.d/hyperfastcgi4 start
