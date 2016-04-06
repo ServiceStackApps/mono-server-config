@@ -11,6 +11,8 @@ Then run following commands in console:
 
 The script will ask you to set up site settings. You have to fill the site name as your domain name or IP address of the server, you can leave other parameters by default (use ENTER for it).
 
+![Install](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/install.png)
+
 After installation is done run the following command:
 
     cd /var/log/hyperfastcgi
