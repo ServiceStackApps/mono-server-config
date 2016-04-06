@@ -3,7 +3,7 @@ This is a guide how to deploy and run Service Stack application on Ubuntu Linux.
 
 Deploy your application to `/var/www/hello-app` folder. If you don't know how to do this please go to Step 1
 
-Then run following commands in console:
+Then run following commands in console. Please note that the `install.sh` script is considered to be run on clean Ubuntu installation, if you have already configured nginx or apache sites on the machine you might be interested in manual configuration which is described in Step 2 and Step 3.
 
     cd ~
     curl -sL https://github.com/ServiceStackApps/mono-server-config/raw/master/install.sh --output install.sh
