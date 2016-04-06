@@ -101,25 +101,25 @@ Download and copy configs
 
 You need to edit `/etc/nginx/fastcgi_params` file
 
-      sudo apt-get mc
-      sudo mcedit /etc/nginx/fastcgi_params
+      sudo nano /etc/nginx/fastcgi_params
 
 Find parameters `SCRIPT_FILENAME` and `PATH_INFO`. If you have such parameters in config file, remove the lines or mark them as comments using hash sign `#`
 
     #fastcgi_param	SCRIPT_FILENAME		$request_filename;
 
-When you end editing press `F2` to save changes and `F10` to exit from editor.
+![nginx configuration](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/nano-nginx-fastcgi.png)
+
+When you end editing press `Ctrl+X` and press 'Y' to save changes and exit from editor.
 
 Then you need to change server name in configs to your server name. This can be
 domain name like www.yourdomain.com or an IP address if you don't have a domain yet.
 Open nginx config for editing:
 
-      sudo apt-get mc
-      sudo mcedit /etc/nginx/sites-available/hello-app.conf
+      sudo nano /etc/nginx/sites-available/hello-app.conf
 
 Then find and change line `server_name hello-app;` to `server_name www.yourdomain.com;`
       
-![nginx configuration](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/nginx-conf.png)
+![nginx configuration](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/nano-nginx-conf.png)
 
 Restart nginx after changes
 
@@ -127,11 +127,11 @@ Restart nginx after changes
 
 Change server name in hyperfastCGI config too.
 
-      sudo mcedit /etc/hyperfastcgi
+      sudo nano /etc/hyperfastcgi
 
 Find and change line `<vhost>hello-app</vhost>` to host name. 
 
-![hyperfastcgi configuration](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/hfc-config.png)
+![hyperfastcgi configuration](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/nano-hfc-config.png)
 
 
 #Step 4: Run the application
