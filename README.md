@@ -13,12 +13,7 @@ The script will ask you to set up site settings. You have to fill the site name 
 
 ![Install](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/install.png)
 
-After installation is done run the following command:
-
-    cd /var/log/hyperfastcgi
-    sudo -H -u www-data nohup hyperfastcgi4 /config=/etc/hyperfastcgi/hfc.config &
-
-To check the site is working properly open `http://www.yoursitedomain.com/metadata` in browser.
+After installation completes check the site is working properly by opening `http://www.yoursitedomain.com/metadata` in browser.
 
 #Step 1: Build and Deploy Application
 
