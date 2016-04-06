@@ -76,6 +76,8 @@ server. Connect to your server via ssh and run these commands in terminal
       sudo apt-get install -y nginx
       #installing HyperFastCGI
       cd ~
+      #Uncomment next line if you use Ubuntu 15.10. libtool-bin package does not exists on Ubuntu 14.04
+      #sudo apt-get install -y libtool-bin
       sudo apt-get install -y git autoconf automake libtool make libglib2.0-dev libevent-dev
       git clone https://github.com/xplicit/hyperfastcgi
       cd hyperfastcgi

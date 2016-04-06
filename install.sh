@@ -4,7 +4,7 @@ SITEDOMAIN="$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut 
 SITELOCATION="/var/www/hello-app/"
 HFCPORT=9000
 
-read -p "Site address or IP, e.g. www.youdomain.com (default: $SITEDOMAIN):" USERSITE
+read -p "Site address or IP, e.g. www.yourdomain.com (default: $SITEDOMAIN):" USERSITE
 
 if [ -z "$USERSITE" ]; then
  USERSITE=$SITEDOMAIN
@@ -49,6 +49,8 @@ echo "Installing nginx..."
 sudo apt-get install -y nginx
 #installing HyperFastCGI
 echo "Installing HyperFastCGI"
+#libtool-bin is required by Ubuntu 15.10 This package does not exist in Ubuntu 14.04 and lower
+sudo apt-get install -y -qqq libtool-bin
 sudo apt-get install -y git autoconf automake libtool make libglib2.0-dev libevent-dev
 git clone https://github.com/xplicit/hyperfastcgi
 cd hyperfastcgi
