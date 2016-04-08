@@ -36,7 +36,7 @@ can use WinSCP or other scp client to do this.
 
 ##Option 1: Upload Using Script
 
-Download [deploy.bat](https://github.com/ServiceStackApps/mono-server-config/blob/master/deploy.bat) and run it
+Download [deploy.bat](https://github.com/ServiceStackApps/mono-server-config/raw/master/deploy.bat) and run it
 
     deploy.bat C:\Projects\SSOnLinuxDeploy www.yourserver.com
 
