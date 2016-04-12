@@ -9,8 +9,9 @@ REM set /p pwd="Password" < nul
 echo option echo off > deploy.txt
 echo option batch on >> deploy.txt
 echo option confirm off >> deploy.txt
-echo open sftp://%USER%:%PWD%@%HOST% >> deploy.txt
+echo open sftp://%USER%:%PWD%@%HOST% -hostkey=* >> deploy.txt
 echo #lcd "$1" >> deploy.txt
+echo mkdir hello-app >> deploy.txt
 echo cd hello-app >> deploy.txt
 echo put -nopermissions -nopreservetime "%1\*" >> deploy.txt
 echo exit >> deploy.txt
