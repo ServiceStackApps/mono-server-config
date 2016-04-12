@@ -36,14 +36,14 @@ can use WinSCP or other scp client to do this.
 
 ##Option 1: Upload Using Script
 
-Download [deploy.bat](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/2-publish-2.png) and run it
+Download [deploy.bat](https://github.com/ServiceStackApps/mono-server-config/raw/master/deploy.bat) and run it
 
     deploy.bat C:\Projects\SSOnLinuxDeploy www.yourserver.com
 
-Change directory to the directory where you deployed ServiceStack application and change `www.yourserve.com` to the ip or host name
+Change directory to the directory where you deployed ServiceStack application and change `www.yourserver.com` to the ip or host name
 of your linux server.
 
-Then input user name and password. The files will be uploaded to the ~/hello-app directory
+Script will ask you to input user name and password. The files will be uploaded to the ~/hello-app directory
 
 ![Publish](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/deploy.png)
 
