@@ -15,7 +15,70 @@ The script will ask you to set up site settings. You have to fill the site name 
 
 After installation completes check the site is working properly by opening `http://www.yoursitedomain.com/metadata` in browser.
 
-#Step 1: Build and Deploy Application
+#Step 1: Create Ubuntu Virtual Machine On Azure
+
+Login to Microsoft Azure and click on `Add` button in `Virtual Machines` pane
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-1.png)
+
+In new opened pane type `Ubuntu Server` in filter string then select `Ubuntu Server 14.04 LTS` and click button `Create`
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-2.png)
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-3.png)
+
+Fill the name of the machine, user name and password, then create new group e. g. `deploy` by clicking on plus sign
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-4.png)
+
+Select appropriate configuration of the virtual machine for your needs.
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-5.png)
+
+Click on `Public IP Address` and switch it to `Static`
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-6.png)
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-7.png)
+
+Preview all the settings and click OK. New virtual machine will be created.
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-8.png)
+
+Wait a little while virtual machine is deploying to physical server. You will see a box with `Deploying` status.
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-9.png)
+
+When the virtual machine has sucessfully deployed the box has change its status to 'Running`
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-10.png)
+
+Select virtual machine and choose `Network Interfaces` menu item. On the right pane you will see public IP address of your machine. Write it down somewhere you will use it when connect to your machine. 
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-11.png)
+
+Then you need to enable firewall to web server. Click on the `Browse` menu item at the bottom of left pane. In new pane type `Network Security` in search box and choose `Newtork Security Group` from the list.
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-12.png)
+
+Select the group belonging to your machine and click on `Inbound security rules` and in new pane click `Add`
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-13.png)
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-14.png)
+
+
+Fill the name `http` and switch the protocol to `TCP`. Source port should be `*` and destination port should be `80`. If you need your site to be accessible via HTTPS, then repeat this step and set name `HTTPS` and destination port `443`
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-15.png)
+
+After adding you will see updated list of firewall rules.
+
+![Deploy](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/0-create-azure-16.png)
+
+Your virtual machine is ready to use.
+
+#Step 2: Build and Deploy Application
 
 Create Project from ServiceStack Blank template. If you don't have ServiceStack templates
 in Visual Studio, you should install [ServiceStack Visual Studio extension](https://github.com/ServiceStack/ServiceStack/wiki/Creating-your-first-project)
@@ -81,7 +144,7 @@ Login to your linux server via SSH and copy files to `/var/www` directory
     sudo mkdir -p /var/www
     sudo cp -R ~/hello-app /var/www
 
-#Step 2: Install mono, nginx and HyperFastCGI
+#Step 3: Install mono, nginx and HyperFastCGI
 
 To run ServiceStack application on Linux server you need to install mono, nginx and hyperfastcgi
 server. Connect to your server via ssh and run these commands in terminal
@@ -102,7 +165,7 @@ server. Connect to your server via ssh and run these commands in terminal
       cd hyperfastcgi
       ./autogen.sh --prefix=/usr && make && sudo make install
 
-#Step 3: Configure nginx and HyperFastCGI
+#Step 4: Configure nginx and HyperFastCGI
       
 Download and copy configs
 
@@ -151,12 +214,12 @@ Find and change line `<vhost>hello-app</vhost>` to host name.
 ![hyperfastcgi configuration](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/nano-hfc-config.png)
 
 
-#Step 4: Run the application
+#Step 5: Run the application
 
       cd /var/log/hyperfastcgi
       sudo -H -u www-data nohup hyperfastcgi4 /config=/etc/hyperfastcgi/hfc.config &
 
 
-#Step 5: Check access to web services
+#Step 6: Check access to web services
 
 Open in browser http://www.yoursitedomain.com/metadata and check availability of services.
