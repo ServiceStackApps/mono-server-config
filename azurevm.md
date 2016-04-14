@@ -1,4 +1,4 @@
-#Step 1: Create Ubuntu Virtual Machine On Azure
+#Create Ubuntu Virtual Machine On Azure
 
 Login to Microsoft Azure and click on `Add` button in `Virtual Machines` pane
 
