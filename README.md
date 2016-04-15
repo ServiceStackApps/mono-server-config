@@ -162,12 +162,23 @@ Find and change line `<vhost>hello-app</vhost>` to host name.
 
 ![hyperfastcgi configuration](https://github.com/ServiceStackApps/mono-server-config/blob/master/images/nano-hfc-config.png)
 
+If you using Ubuntu 14.04 install upstart scripts
+
+     cd ~/hfc-install/hyperfastcgi/samples/ubuntu-startup/upstart && sudo install-service.sh
+
+For Ubuntu 15.04 and higher install systemd scripts
+
+     cd ~/hfc-install/hyperfastcgi/samples/ubuntu-startup/systemd && sudo install-service.sh
 
 #Step 5: Run the application
 
-      cd /var/log/hyperfastcgi
-      sudo -H -u www-data nohup hyperfastcgi4 /config=/etc/hyperfastcgi/hfc.config &
+Ubuntu 14.04
 
+      sudo start hyperfastcgi
+
+Ubuntu 15.04+
+
+      sudo systemctl start hyperfastcgi.service
 
 #Step 6: Check access to web services
 

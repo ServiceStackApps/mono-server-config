@@ -69,12 +69,21 @@ echo "Update /etc/nginx/fastcgi_params"
 sed -e "s/\(fastcgi_param[[:space:]]*SCRIPT_FILENAME\)/#\1/" -e "s/\(fastcgi_param[[:space:]]*PATH_INFO\)/#\1/" /etc/nginx/fastcgi_params > config/fastcgi_params
 sudo cp config/fastcgi_params /etc/nginx/fastcgi_params
 
+sudo /etc/init.d/nginx restart
 
 sudo mkdir -p /etc/hyperfastcgi
 sudo mkdir -p /var/log/hyperfastcgi
 sudo chown -R www-data:www-data /var/log/hyperfastcgi
 sudo cp config/hfc.config /etc/hyperfastcgi
-(cd hyperfastcgi/samples/ubuntu-startup/ && source install-service.sh)
+
+if [[ $(ps -p1 | grep systemd && echo systemd || echo upstart) == "upstart" ]]; then
+  (cd hyperfastcgi/samples/ubuntu-startup/upstart && source install-service.sh)
+  sudo start hyperfastcgi
+else
+  #(cd hyperfastcgi/samples/ubuntu-startup/init.d && source install-service.sh)
+  #sudo /etc/init.d/hyperfastcgi4 start
+  (cd hyperfastcgi/samples/ubuntu-startup/systemd && source install-service.sh)
+  sudo systemctl start hyperfastcgi.service
+fi
 
 sudo /etc/init.d/nginx restart
-sudo /etc/init.d/hyperfastcgi4 start
